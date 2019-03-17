@@ -1,22 +1,20 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace DAWforPMD
 {
     class MAIN
     {
+        [STAThread]
         static void Main(string[] args)
         {
             Form1 cForm1 = new Form1();
 
-            //モーダルでフォームを表示する
-            cForm1.ShowDialog();
+            // フォームを表示
+            cForm1.Show();
 
-            //リソースを解放する
-            cForm1.Dispose();
+            // メインフレームを指定して、イベントループを発生させる
+            Application.Run(cForm1);
         }
     }
 }
