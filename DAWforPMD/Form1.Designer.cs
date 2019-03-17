@@ -65,6 +65,7 @@
             this.ALGORITHM = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.NOTES = new System.Windows.Forms.Panel();
+            this.RELEASERATE4 = new System.Windows.Forms.ComboBox();
             this.MENU.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -125,6 +126,7 @@
             this.MENU.Controls.Add(this.ATTACKRATE3);
             this.MENU.Controls.Add(this.ATTACKRATE2);
             this.MENU.Controls.Add(this.SUSTAINRATE4);
+            this.MENU.Controls.Add(this.RELEASERATE4);
             this.MENU.Controls.Add(this.RELEASERATE3);
             this.MENU.Controls.Add(this.DECAYRATE4);
             this.MENU.Controls.Add(this.SUSTAINRATE3);
@@ -913,6 +915,33 @@
             this.NOTES.Size = new System.Drawing.Size(1264, 500);
             this.NOTES.TabIndex = 0;
             // 
+            // RELEASERATE4
+            // 
+            this.RELEASERATE4.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.RELEASERATE4.FormattingEnabled = true;
+            this.RELEASERATE4.Items.AddRange(new object[] {
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10",
+            "11",
+            "12",
+            "13",
+            "14",
+            "15"});
+            this.RELEASERATE4.Location = new System.Drawing.Point(359, 119);
+            this.RELEASERATE4.Name = "RELEASERATE4";
+            this.RELEASERATE4.Size = new System.Drawing.Size(50, 20);
+            this.RELEASERATE4.TabIndex = 5;
+            this.RELEASERATE4.SelectedIndexChanged += new System.EventHandler(this.comboBox3_SelectedIndexChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -970,5 +999,6 @@
         private System.Windows.Forms.ComboBox RELEASERATE3;
         private System.Windows.Forms.ComboBox RELEASERATE2;
         private System.Windows.Forms.ComboBox RELEASERATE1;
+        private System.Windows.Forms.ComboBox RELEASERATE4;
     }
 }
