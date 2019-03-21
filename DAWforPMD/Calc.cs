@@ -54,7 +54,7 @@ namespace DAWforPMD
             return 0f;
         }
 
-        public static Byte ClacHex(int bit)
+        public static Byte ClacHex(int bit) //10000101とかで入力、出力は0x85など。
         {
             Byte HEXout = 0;
             for(int i = 0; i < 8; i++)

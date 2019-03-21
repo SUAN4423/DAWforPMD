@@ -44,6 +44,23 @@ namespace DAWforPMD
             }
         }
 
+        public static void WriteBit(Boolean DATA, Byte Offset)
+        {
+            if (Offset >= 8) return;
+            uint DATAtemp = Read();
+            if(DATA)
+            {
+                if (((DATAtemp >> (int)Offset) & 0x01) == 0x01) ;
+                else DATAtemp += (uint)0x01 << (int)Offset;
+            }
+            else
+            {
+                if (((DATAtemp >> (int)Offset) & 0x01) == 0x00) ;
+                else DATAtemp -= (uint)0x01 << (int)Offset;
+            }
+            Write((Byte)DATAtemp);
+        }
+
         public static void Write(Byte DATA)
         {
             Regista[SelectedRegNum] = DATA;
