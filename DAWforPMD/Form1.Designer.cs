@@ -38,6 +38,8 @@
             this.label10 = new System.Windows.Forms.Label();
             this.FMNUM = new System.Windows.Forms.ComboBox();
             this.label11 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
@@ -48,12 +50,18 @@
             this.ATTACKRATE3 = new System.Windows.Forms.ComboBox();
             this.ATTACKRATE2 = new System.Windows.Forms.ComboBox();
             this.SUSTAINRATE4 = new System.Windows.Forms.ComboBox();
+            this.RELEASERATE4 = new System.Windows.Forms.ComboBox();
             this.RELEASERATE3 = new System.Windows.Forms.ComboBox();
             this.DECAYRATE4 = new System.Windows.Forms.ComboBox();
             this.SUSTAINRATE3 = new System.Windows.Forms.ComboBox();
             this.RELEASERATE2 = new System.Windows.Forms.ComboBox();
             this.DECAYRATE3 = new System.Windows.Forms.ComboBox();
             this.SUSTAINRATE2 = new System.Windows.Forms.ComboBox();
+            this.TOTALLEVEL3 = new System.Windows.Forms.ComboBox();
+            this.TOTALLEVEL2 = new System.Windows.Forms.ComboBox();
+            this.TOTALLEVEL4 = new System.Windows.Forms.ComboBox();
+            this.SUSTAINLEVEL1 = new System.Windows.Forms.ComboBox();
+            this.TOTALLEVEL1 = new System.Windows.Forms.ComboBox();
             this.RELEASERATE1 = new System.Windows.Forms.ComboBox();
             this.DECAYRATE2 = new System.Windows.Forms.ComboBox();
             this.SUSTAINRATE1 = new System.Windows.Forms.ComboBox();
@@ -65,7 +73,9 @@
             this.ALGORITHM = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.NOTES = new System.Windows.Forms.Panel();
-            this.RELEASERATE4 = new System.Windows.Forms.ComboBox();
+            this.SUSTAINLEVEL2 = new System.Windows.Forms.ComboBox();
+            this.SUSTAINLEVEL4 = new System.Windows.Forms.ComboBox();
+            this.SUSTAINLEVEL3 = new System.Windows.Forms.ComboBox();
             this.MENU.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -116,6 +126,8 @@
             this.MENU.Controls.Add(this.label10);
             this.MENU.Controls.Add(this.FMNUM);
             this.MENU.Controls.Add(this.label11);
+            this.MENU.Controls.Add(this.label14);
+            this.MENU.Controls.Add(this.label13);
             this.MENU.Controls.Add(this.label12);
             this.MENU.Controls.Add(this.label9);
             this.MENU.Controls.Add(this.label8);
@@ -133,6 +145,14 @@
             this.MENU.Controls.Add(this.RELEASERATE2);
             this.MENU.Controls.Add(this.DECAYRATE3);
             this.MENU.Controls.Add(this.SUSTAINRATE2);
+            this.MENU.Controls.Add(this.TOTALLEVEL3);
+            this.MENU.Controls.Add(this.TOTALLEVEL2);
+            this.MENU.Controls.Add(this.TOTALLEVEL4);
+            this.MENU.Controls.Add(this.SUSTAINLEVEL4);
+            this.MENU.Controls.Add(this.SUSTAINLEVEL3);
+            this.MENU.Controls.Add(this.SUSTAINLEVEL2);
+            this.MENU.Controls.Add(this.SUSTAINLEVEL1);
+            this.MENU.Controls.Add(this.TOTALLEVEL1);
             this.MENU.Controls.Add(this.RELEASERATE1);
             this.MENU.Controls.Add(this.DECAYRATE2);
             this.MENU.Controls.Add(this.SUSTAINRATE1);
@@ -194,6 +214,26 @@
             this.label11.Size = new System.Drawing.Size(21, 12);
             this.label11.TabIndex = 13;
             this.label11.Text = "DR";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(430, 20);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(18, 12);
+            this.label14.TabIndex = 13;
+            this.label14.Text = "SL";
+            this.label14.Click += new System.EventHandler(this.label12_Click);
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(486, 20);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(18, 12);
+            this.label13.TabIndex = 13;
+            this.label13.Text = "TL";
+            this.label13.Click += new System.EventHandler(this.label12_Click);
             // 
             // label12
             // 
@@ -419,6 +459,33 @@
             this.SUSTAINRATE4.Size = new System.Drawing.Size(50, 20);
             this.SUSTAINRATE4.TabIndex = 5;
             // 
+            // RELEASERATE4
+            // 
+            this.RELEASERATE4.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.RELEASERATE4.FormattingEnabled = true;
+            this.RELEASERATE4.Items.AddRange(new object[] {
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10",
+            "11",
+            "12",
+            "13",
+            "14",
+            "15"});
+            this.RELEASERATE4.Location = new System.Drawing.Point(359, 119);
+            this.RELEASERATE4.Name = "RELEASERATE4";
+            this.RELEASERATE4.Size = new System.Drawing.Size(50, 20);
+            this.RELEASERATE4.TabIndex = 5;
+            this.RELEASERATE4.SelectedIndexChanged += new System.EventHandler(this.comboBox3_SelectedIndexChanged);
+            // 
             // RELEASERATE3
             // 
             this.RELEASERATE3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -640,6 +707,589 @@
             this.SUSTAINRATE2.Name = "SUSTAINRATE2";
             this.SUSTAINRATE2.Size = new System.Drawing.Size(50, 20);
             this.SUSTAINRATE2.TabIndex = 5;
+            // 
+            // TOTALLEVEL3
+            // 
+            this.TOTALLEVEL3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.TOTALLEVEL3.FormattingEnabled = true;
+            this.TOTALLEVEL3.Items.AddRange(new object[] {
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10",
+            "11",
+            "12",
+            "13",
+            "14",
+            "15",
+            "16",
+            "17",
+            "18",
+            "19",
+            "20",
+            "21",
+            "22",
+            "23",
+            "24",
+            "25",
+            "26",
+            "27",
+            "28",
+            "29",
+            "30",
+            "31",
+            "32",
+            "33",
+            "34",
+            "35",
+            "36",
+            "37",
+            "38",
+            "39",
+            "40",
+            "41",
+            "42",
+            "43",
+            "44",
+            "45",
+            "46",
+            "47",
+            "48",
+            "49",
+            "50",
+            "51",
+            "52",
+            "53",
+            "54",
+            "55",
+            "56",
+            "57",
+            "58",
+            "59",
+            "60",
+            "61",
+            "62",
+            "63",
+            "64",
+            "65",
+            "66",
+            "67",
+            "68",
+            "69",
+            "70",
+            "71",
+            "72",
+            "73",
+            "74",
+            "75",
+            "76",
+            "77",
+            "78",
+            "79",
+            "80",
+            "81",
+            "82",
+            "83",
+            "84",
+            "85",
+            "86",
+            "87",
+            "88",
+            "89",
+            "90",
+            "91",
+            "92",
+            "93",
+            "94",
+            "95",
+            "96",
+            "97",
+            "98",
+            "99",
+            "100",
+            "101",
+            "102",
+            "103",
+            "104",
+            "105",
+            "106",
+            "107",
+            "108",
+            "109",
+            "110",
+            "111",
+            "112",
+            "113",
+            "114",
+            "115",
+            "116",
+            "117",
+            "118",
+            "119",
+            "120",
+            "121",
+            "122",
+            "123",
+            "124",
+            "125",
+            "126",
+            "127"});
+            this.TOTALLEVEL3.Location = new System.Drawing.Point(471, 93);
+            this.TOTALLEVEL3.Name = "TOTALLEVEL3";
+            this.TOTALLEVEL3.Size = new System.Drawing.Size(50, 20);
+            this.TOTALLEVEL3.TabIndex = 5;
+            this.TOTALLEVEL3.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged_1);
+            // 
+            // TOTALLEVEL2
+            // 
+            this.TOTALLEVEL2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.TOTALLEVEL2.FormattingEnabled = true;
+            this.TOTALLEVEL2.Items.AddRange(new object[] {
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10",
+            "11",
+            "12",
+            "13",
+            "14",
+            "15",
+            "16",
+            "17",
+            "18",
+            "19",
+            "20",
+            "21",
+            "22",
+            "23",
+            "24",
+            "25",
+            "26",
+            "27",
+            "28",
+            "29",
+            "30",
+            "31",
+            "32",
+            "33",
+            "34",
+            "35",
+            "36",
+            "37",
+            "38",
+            "39",
+            "40",
+            "41",
+            "42",
+            "43",
+            "44",
+            "45",
+            "46",
+            "47",
+            "48",
+            "49",
+            "50",
+            "51",
+            "52",
+            "53",
+            "54",
+            "55",
+            "56",
+            "57",
+            "58",
+            "59",
+            "60",
+            "61",
+            "62",
+            "63",
+            "64",
+            "65",
+            "66",
+            "67",
+            "68",
+            "69",
+            "70",
+            "71",
+            "72",
+            "73",
+            "74",
+            "75",
+            "76",
+            "77",
+            "78",
+            "79",
+            "80",
+            "81",
+            "82",
+            "83",
+            "84",
+            "85",
+            "86",
+            "87",
+            "88",
+            "89",
+            "90",
+            "91",
+            "92",
+            "93",
+            "94",
+            "95",
+            "96",
+            "97",
+            "98",
+            "99",
+            "100",
+            "101",
+            "102",
+            "103",
+            "104",
+            "105",
+            "106",
+            "107",
+            "108",
+            "109",
+            "110",
+            "111",
+            "112",
+            "113",
+            "114",
+            "115",
+            "116",
+            "117",
+            "118",
+            "119",
+            "120",
+            "121",
+            "122",
+            "123",
+            "124",
+            "125",
+            "126",
+            "127"});
+            this.TOTALLEVEL2.Location = new System.Drawing.Point(471, 67);
+            this.TOTALLEVEL2.Name = "TOTALLEVEL2";
+            this.TOTALLEVEL2.Size = new System.Drawing.Size(50, 20);
+            this.TOTALLEVEL2.TabIndex = 5;
+            this.TOTALLEVEL2.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged_1);
+            // 
+            // TOTALLEVEL4
+            // 
+            this.TOTALLEVEL4.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.TOTALLEVEL4.FormattingEnabled = true;
+            this.TOTALLEVEL4.Items.AddRange(new object[] {
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10",
+            "11",
+            "12",
+            "13",
+            "14",
+            "15",
+            "16",
+            "17",
+            "18",
+            "19",
+            "20",
+            "21",
+            "22",
+            "23",
+            "24",
+            "25",
+            "26",
+            "27",
+            "28",
+            "29",
+            "30",
+            "31",
+            "32",
+            "33",
+            "34",
+            "35",
+            "36",
+            "37",
+            "38",
+            "39",
+            "40",
+            "41",
+            "42",
+            "43",
+            "44",
+            "45",
+            "46",
+            "47",
+            "48",
+            "49",
+            "50",
+            "51",
+            "52",
+            "53",
+            "54",
+            "55",
+            "56",
+            "57",
+            "58",
+            "59",
+            "60",
+            "61",
+            "62",
+            "63",
+            "64",
+            "65",
+            "66",
+            "67",
+            "68",
+            "69",
+            "70",
+            "71",
+            "72",
+            "73",
+            "74",
+            "75",
+            "76",
+            "77",
+            "78",
+            "79",
+            "80",
+            "81",
+            "82",
+            "83",
+            "84",
+            "85",
+            "86",
+            "87",
+            "88",
+            "89",
+            "90",
+            "91",
+            "92",
+            "93",
+            "94",
+            "95",
+            "96",
+            "97",
+            "98",
+            "99",
+            "100",
+            "101",
+            "102",
+            "103",
+            "104",
+            "105",
+            "106",
+            "107",
+            "108",
+            "109",
+            "110",
+            "111",
+            "112",
+            "113",
+            "114",
+            "115",
+            "116",
+            "117",
+            "118",
+            "119",
+            "120",
+            "121",
+            "122",
+            "123",
+            "124",
+            "125",
+            "126",
+            "127"});
+            this.TOTALLEVEL4.Location = new System.Drawing.Point(471, 119);
+            this.TOTALLEVEL4.Name = "TOTALLEVEL4";
+            this.TOTALLEVEL4.Size = new System.Drawing.Size(50, 20);
+            this.TOTALLEVEL4.TabIndex = 5;
+            this.TOTALLEVEL4.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged_1);
+            // 
+            // SUSTAINLEVEL1
+            // 
+            this.SUSTAINLEVEL1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.SUSTAINLEVEL1.FormattingEnabled = true;
+            this.SUSTAINLEVEL1.Items.AddRange(new object[] {
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10",
+            "11",
+            "12",
+            "13",
+            "14",
+            "15"});
+            this.SUSTAINLEVEL1.Location = new System.Drawing.Point(415, 41);
+            this.SUSTAINLEVEL1.Name = "SUSTAINLEVEL1";
+            this.SUSTAINLEVEL1.Size = new System.Drawing.Size(50, 20);
+            this.SUSTAINLEVEL1.TabIndex = 5;
+            this.SUSTAINLEVEL1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged_1);
+            // 
+            // TOTALLEVEL1
+            // 
+            this.TOTALLEVEL1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.TOTALLEVEL1.FormattingEnabled = true;
+            this.TOTALLEVEL1.Items.AddRange(new object[] {
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10",
+            "11",
+            "12",
+            "13",
+            "14",
+            "15",
+            "16",
+            "17",
+            "18",
+            "19",
+            "20",
+            "21",
+            "22",
+            "23",
+            "24",
+            "25",
+            "26",
+            "27",
+            "28",
+            "29",
+            "30",
+            "31",
+            "32",
+            "33",
+            "34",
+            "35",
+            "36",
+            "37",
+            "38",
+            "39",
+            "40",
+            "41",
+            "42",
+            "43",
+            "44",
+            "45",
+            "46",
+            "47",
+            "48",
+            "49",
+            "50",
+            "51",
+            "52",
+            "53",
+            "54",
+            "55",
+            "56",
+            "57",
+            "58",
+            "59",
+            "60",
+            "61",
+            "62",
+            "63",
+            "64",
+            "65",
+            "66",
+            "67",
+            "68",
+            "69",
+            "70",
+            "71",
+            "72",
+            "73",
+            "74",
+            "75",
+            "76",
+            "77",
+            "78",
+            "79",
+            "80",
+            "81",
+            "82",
+            "83",
+            "84",
+            "85",
+            "86",
+            "87",
+            "88",
+            "89",
+            "90",
+            "91",
+            "92",
+            "93",
+            "94",
+            "95",
+            "96",
+            "97",
+            "98",
+            "99",
+            "100",
+            "101",
+            "102",
+            "103",
+            "104",
+            "105",
+            "106",
+            "107",
+            "108",
+            "109",
+            "110",
+            "111",
+            "112",
+            "113",
+            "114",
+            "115",
+            "116",
+            "117",
+            "118",
+            "119",
+            "120",
+            "121",
+            "122",
+            "123",
+            "124",
+            "125",
+            "126",
+            "127"});
+            this.TOTALLEVEL1.Location = new System.Drawing.Point(471, 41);
+            this.TOTALLEVEL1.Name = "TOTALLEVEL1";
+            this.TOTALLEVEL1.Size = new System.Drawing.Size(50, 20);
+            this.TOTALLEVEL1.TabIndex = 5;
+            this.TOTALLEVEL1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged_1);
             // 
             // RELEASERATE1
             // 
@@ -915,11 +1565,11 @@
             this.NOTES.Size = new System.Drawing.Size(1264, 500);
             this.NOTES.TabIndex = 0;
             // 
-            // RELEASERATE4
+            // SUSTAINLEVEL2
             // 
-            this.RELEASERATE4.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.RELEASERATE4.FormattingEnabled = true;
-            this.RELEASERATE4.Items.AddRange(new object[] {
+            this.SUSTAINLEVEL2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.SUSTAINLEVEL2.FormattingEnabled = true;
+            this.SUSTAINLEVEL2.Items.AddRange(new object[] {
             "0",
             "1",
             "2",
@@ -936,11 +1586,65 @@
             "13",
             "14",
             "15"});
-            this.RELEASERATE4.Location = new System.Drawing.Point(359, 119);
-            this.RELEASERATE4.Name = "RELEASERATE4";
-            this.RELEASERATE4.Size = new System.Drawing.Size(50, 20);
-            this.RELEASERATE4.TabIndex = 5;
-            this.RELEASERATE4.SelectedIndexChanged += new System.EventHandler(this.comboBox3_SelectedIndexChanged);
+            this.SUSTAINLEVEL2.Location = new System.Drawing.Point(415, 67);
+            this.SUSTAINLEVEL2.Name = "SUSTAINLEVEL2";
+            this.SUSTAINLEVEL2.Size = new System.Drawing.Size(50, 20);
+            this.SUSTAINLEVEL2.TabIndex = 5;
+            this.SUSTAINLEVEL2.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged_1);
+            // 
+            // SUSTAINLEVEL4
+            // 
+            this.SUSTAINLEVEL4.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.SUSTAINLEVEL4.FormattingEnabled = true;
+            this.SUSTAINLEVEL4.Items.AddRange(new object[] {
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10",
+            "11",
+            "12",
+            "13",
+            "14",
+            "15"});
+            this.SUSTAINLEVEL4.Location = new System.Drawing.Point(415, 119);
+            this.SUSTAINLEVEL4.Name = "SUSTAINLEVEL4";
+            this.SUSTAINLEVEL4.Size = new System.Drawing.Size(50, 20);
+            this.SUSTAINLEVEL4.TabIndex = 5;
+            this.SUSTAINLEVEL4.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged_1);
+            // 
+            // SUSTAINLEVEL3
+            // 
+            this.SUSTAINLEVEL3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.SUSTAINLEVEL3.FormattingEnabled = true;
+            this.SUSTAINLEVEL3.Items.AddRange(new object[] {
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10",
+            "11",
+            "12",
+            "13",
+            "14",
+            "15"});
+            this.SUSTAINLEVEL3.Location = new System.Drawing.Point(415, 93);
+            this.SUSTAINLEVEL3.Name = "SUSTAINLEVEL3";
+            this.SUSTAINLEVEL3.Size = new System.Drawing.Size(50, 20);
+            this.SUSTAINLEVEL3.TabIndex = 5;
+            this.SUSTAINLEVEL3.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged_1);
             // 
             // Form1
             // 
@@ -1000,5 +1704,15 @@
         private System.Windows.Forms.ComboBox RELEASERATE2;
         private System.Windows.Forms.ComboBox RELEASERATE1;
         private System.Windows.Forms.ComboBox RELEASERATE4;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.ComboBox TOTALLEVEL1;
+        private System.Windows.Forms.ComboBox TOTALLEVEL2;
+        private System.Windows.Forms.ComboBox TOTALLEVEL4;
+        private System.Windows.Forms.ComboBox TOTALLEVEL3;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.ComboBox SUSTAINLEVEL1;
+        private System.Windows.Forms.ComboBox SUSTAINLEVEL4;
+        private System.Windows.Forms.ComboBox SUSTAINLEVEL3;
+        private System.Windows.Forms.ComboBox SUSTAINLEVEL2;
     }
 }
