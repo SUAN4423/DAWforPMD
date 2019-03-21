@@ -8,13 +8,14 @@ namespace DAWforPMD
 {
     class Register
     {
-        protected static Byte[] Regista = new byte[0x100];
+        protected static Byte[,] Regista = new byte[2,0x100];
 
         public static void RegistaReset()
         {
             for(int i = 0; i < 0x100; i++)
             {
-                Regista[i] = 0x00b;
+                Regista[0, i] = 0x00b;
+                Regista[1, i] = 0x00b;
             }
         }
 
@@ -53,10 +54,10 @@ namespace DAWforPMD
             }
         }
 
-        public static void WriteBit(Boolean DATA, Byte Offset)
+        public static void WriteBit(Boolean DATA, Byte Offset, Boolean A1)
         {
             if (Offset >= 8) return;
-            uint DATAtemp = Read();
+            uint DATAtemp = Read(A1);
             if(DATA)
             {
                 if (((DATAtemp >> (int)Offset) & 0x01) == 0x01) ;
@@ -67,17 +68,17 @@ namespace DAWforPMD
                 if (((DATAtemp >> (int)Offset) & 0x01) == 0x00) ;
                 else DATAtemp -= (uint)0x01 << (int)Offset;
             }
-            Write((Byte)DATAtemp);
+            Write((Byte)DATAtemp, A1);
         }
 
-        public static void Write(Byte DATA)
+        public static void Write(Byte DATA, Boolean A1)
         {
-            Regista[SelectedRegNum] = DATA;
+            Regista[A1 ? 1 : 0, SelectedRegNum] = DATA;
         }
 
-        public static Byte Read()
+        public static Byte Read(Boolean A1)
         {
-            return Regista[SelectedRegNum];
+            return Regista[A1 ? 1 : 0, SelectedRegNum];
         }
     }
 }
