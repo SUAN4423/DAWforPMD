@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DAWforPMD
 {
-    class YM2603 : Register
+    class YM2608 : Register
     {
         const float MasterClock = 8.0f; //メインクロック (MHz)
     }
