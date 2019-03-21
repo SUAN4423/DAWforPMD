@@ -36,6 +36,8 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Calc.cs" />
+    <Compile Include="Default.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -43,6 +45,8 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="MAIN.cs" />
+    <Compile Include="Register.cs" />
+    <Compile Include="YM2608.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />

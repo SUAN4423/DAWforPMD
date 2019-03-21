@@ -8,6 +8,6 @@ namespace DAWforPMD
 {
     class YM2608 : Register
     {
-        const float MasterClock = 8.0f; //メインクロック (MHz)
+        public static float MasterClock = 8.0f; //メインクロック (MHz)
     }
 }
