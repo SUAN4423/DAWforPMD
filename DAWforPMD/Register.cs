@@ -27,16 +27,22 @@ namespace DAWforPMD
                 case 0x2D:
                     {
                         YM2608.MasterClock = 8.0f;
+                        YM2608.FMDivision = 6;
+                        YM2608.SSGDivision = 4;
                         break;
                     }
                 case 0x2E:
                     {
                         YM2608.MasterClock = 4.0f;
+                        YM2608.FMDivision = 3;
+                        YM2608.SSGDivision = 2;
                         break;
                     }
                 case 0x2F:
                     {
                         YM2608.MasterClock = 2.67f;
+                        YM2608.FMDivision = 2;
+                        YM2608.SSGDivision = 1;
                         break;
                     }
                 default:
