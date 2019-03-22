@@ -14,8 +14,8 @@ namespace DAWforPMD
         {
             for(int i = 0; i < 0x100; i++)
             {
-                Regista[0, i] = 0x00b;
-                Regista[1, i] = 0x00b;
+                Regista[0, i] = 0x00;
+                Regista[1, i] = 0x00;
             }
         }
 
