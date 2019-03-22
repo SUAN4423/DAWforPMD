@@ -5,9 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace DAWforPMD.YM2608 {
-  interface IChannel {
-    void  pushEvent(OPNAEvent anEvent);
-    void  nextCycle();
-    float getSample();
+  class OPNAEvent {
+    public uint timecode { get; set; } = 0;
   }
 }

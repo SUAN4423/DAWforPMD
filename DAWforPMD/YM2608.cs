@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 
 namespace DAWforPMD.YM2608 {
@@ -7,16 +8,17 @@ namespace DAWforPMD.YM2608 {
     public static Byte FMDivision = 6;
     public static Byte SSGDivision = 4;
 
-    public List<IChannel> channels;
-
     private const uint m_clock = 8000000;
-    private uint m_counter = 0;
 
     private double m_correction = 0;
 
     private const uint sample_rate = 44100;
     private readonly uint m_cycles_per_sample = m_clock / sample_rate;
     private readonly uint m_cycles_cor = m_clock % sample_rate;
+
+    public IChannel[] channels;
+    private Stack<OPNAEvent>[] m_events_sorted;
+    private readonly uint m_ticks = 480;
 
     private void generateSample(ref float[] buffer) {
       for (var i = 0; i < buffer.Length; i++) {
@@ -29,19 +31,23 @@ namespace DAWforPMD.YM2608 {
           c++;
         }
 
-        foreach (var a in channels) {
+        for (var i = 0; i < channels.Length; i++) {
+          var ch        = channels[i];
+          var nextEvent = m_events_sorted.Peek();
+
           // クロックのサイクルを回す
-          for (uint j = 0; j < c; j++)
-            a.nextCycle(m_counter + j);
+          for (uint j = 0; j < c; j++) {
+            
+            ch.nextCycle();
+          }
 
           // チャンネルの標本を取る
-          val = val + a.getSample();
+          val = val + ch.getSample();
         }
 
         buffer[i] = val;
 
         // クロックを進める
-        m_counter += c;
         m_correction += m_cycles_cor * c;
       }
     }

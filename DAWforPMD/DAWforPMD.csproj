@@ -46,6 +46,7 @@
     </Compile>
     <Compile Include="IChannel.cs" />
     <Compile Include="MAIN.cs" />
+    <Compile Include="OPNAEvent.cs" />
     <Compile Include="Register.cs" />
     <Compile Include="YM2608.cs" />
   </ItemGroup>
