@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelStore">
+    <e p="$PROJECT_DIR$" t="IncludeFlat">
+      <e p="DAWforPMD" t="IncludeRecursive">
+        <e p="App.config" t="Include" />
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="Calc.cs" t="Include" />
+        <e p="DAWforPMD.csproj" t="IncludeRecursive" />
+        <e p="Default.cs" t="Include" />
+        <e p="Form1.cs" t="Include" />
+        <e p="Form1.Designer.cs" t="Include" />
+        <e p="Form1.resx" t="Include" />
+        <e p="IChannel.cs" t="Include" />
+        <e p="MAIN.cs" t="Include" />
+        <e p="obj" t="ExcludeRecursive" />
+        <e p="Register.cs" t="Include" />
+        <e p="SST.cs" t="Include" />
+        <e p="YM2608.cs" t="Include" />
+      </e>
+      <e p="DAWforPMD.sln" t="IncludeFlat" />
+      <e p="packages" t="ExcludeRecursive" />
+    </e>
+    <e p="$PROJECT_DIR$/../Library/Caches/Rider2018.3/extResources" t="IncludeRecursive" />
+    <e p="$PROJECT_DIR$/../Library/Caches/Rider2018.3/resharper-host/local/Transient/ReSharperHost/v183/SolutionCaches/_DAWforPMD.446536740.00" t="ExcludeRecursive" />
+  </component>
+</project>
