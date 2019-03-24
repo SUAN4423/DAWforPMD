@@ -76,7 +76,7 @@ namespace DAWforPMD.STT {
     /// CCCC -> チャンネル番号 (0 - 15)  <br/>
     ///  ooo -> オペレータ番号           <br/>
     /// である。
-    public UInt8 Target { get; set; }
+    public byte Target { get; set; }
 
     /// <summary>
     /// 相対時間
@@ -105,17 +105,17 @@ namespace DAWforPMD.STT {
     public UInt16 Value;
 
     // Targetへのアクセサー
-    public UInt8 Channel {
-      get => (Target >> 3) & 0x0F;
-      set => Target = Target & 0x0F | value;
+    public byte Channel {
+      get => (byte) ((Target >> 3) & 0x0F);
+      set => Target = (byte) (Target & 0x0F | value);
     }
 
-    public UInt8 Operator {
-      get => Target & 0x07;
-      set => Target = Target & 0x0F | value;
+    public byte Operator {
+      get => (byte) (Target & 0x07);
+      set => Target = (byte) (Target & 0x0F | value);
     }
 
-    public bool IsTargetTrack => Target >> 7;
+    public bool IsTargetTrack => (Target >> 7) != 0;
   }
 
   static class _QueueExtensions {
