@@ -16,7 +16,7 @@ namespace DAWforPMD {
     }
 
     // 係数を計算
-    protected virtual void CalcCoefficient() { }
+    protected virtual void CalcCoefficient() => throw new NotImplementedException();
 
     public void SetPeakFrequency(float freq) {
       w0    = 2 * Math.PI * freq / samplingFreq;
