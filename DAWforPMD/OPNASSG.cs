@@ -7,7 +7,7 @@ using DAWforPMD.STT;
 
 namespace DAWforPMD.YM2608 {
   public class OPNASSG : IChannel {
-    public bool KeyOnStatus = false;
+    private bool KeyOnStatus = false;
     
     public void PushEvent(SSTTrackEvent anEvent) {
       switch (anEvent.EventType) {
@@ -35,7 +35,7 @@ namespace DAWforPMD.YM2608 {
     }
 
     public float GetSample() {
-      throw new System.NotImplementedException();
+      return .0f;
     }
   }
 }
