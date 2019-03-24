@@ -8,7 +8,7 @@ namespace DAWforPMD
 {
     class Register
     {
-        protected static Byte[,] Regista = new byte[2,0x100];
+        /* protected static Byte[,] Regista = new byte[2,0x100];
 
         public static void RegistaReset()
         {
@@ -79,6 +79,6 @@ namespace DAWforPMD
         public static Byte Read(Boolean A1)
         {
             return Regista[A1 ? 1 : 0, SelectedRegNum];
-        }
+        } */
     }
 }
