@@ -59,4 +59,3 @@ typedef union _sst_mnemonic_t {
 #endif
 
 #endif // _SST_H
-

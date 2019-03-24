@@ -28,9 +28,18 @@ namespace DAWforPMD.YM2608 {
 
     private IChannel[]  Channels;
     private SSTSequence Sequence;
-    public  void        LoadSequence(SSTSequence sequence) => this.Sequence = sequence;
+
+    private LowpassFilter lpf;
+
+    public YM2608() {
+      // にゃーん
+      lpf = new LowpassFilter(SampleFreq);
+    }
+
+    public void LoadSequence(SSTSequence sequence) => this.Sequence = sequence;
 
     private void ProcessBuffer(ref float[] buffer) {
+      // 与えられたバッファの分だけ信号を処理
       for (var i = 0; i < buffer.Length; i++) {
         var val = .0f;
 
@@ -67,11 +76,16 @@ namespace DAWforPMD.YM2608 {
           TickGen_ClockCounter++;
         }
 
-        // すべてのチャンネルのサイクルを進める
+        // すべてのチャンネルのサイクルを進めて、その結果をサミングする
+        // （フィルター処理はしない）
         for (var j = 0; j < c; j++) {
           for (uint k = 0; k < Channels.Length; k++) {
             Channels[k].NextCycle();
           }
+        }
+
+        foreach (var ch in Channels) {
+          val = val + ch.GetSample();
         }
 
         // クロックを進める
@@ -81,6 +95,9 @@ namespace DAWforPMD.YM2608 {
         // 求めた結果を代入する
         buffer[i] = val;
       }
+
+      // ローパスフィルターに通す
+      lpf.ProcessSample(ref buffer);
     }
   }
 }
