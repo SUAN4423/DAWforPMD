@@ -42,6 +42,13 @@ namespace DAWforPMD {
       var pos = (byte) (1 << offset);
       Write((byte) ((Read(A1) & ~pos) | (value ? pos : 0)), A1);
     }
+    
+    public static void ToggleBit(byte offset, bool A1) {
+      if (offset >= 8)
+        throw new IndexOutOfRangeException();
+
+      Write((byte) (Read(A1) ^ (1 << offset)), A1);
+    }
 
     public static void Write(byte value, bool A1) {
       // レジスタの値を書き換える
