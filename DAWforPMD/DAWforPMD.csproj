@@ -50,6 +50,7 @@
     <Compile Include="OPNASSG.cs" />
     <Compile Include="Register.cs" />
     <Compile Include="SST.cs" />
+    <Compile Include="Tuner.cs" />
     <Compile Include="YM2608.cs" />
   </ItemGroup>
   <ItemGroup>
