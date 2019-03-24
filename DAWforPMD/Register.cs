@@ -4,81 +4,61 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DAWforPMD
-{
-    class Register
-    {
-        /* protected static Byte[,] Regista = new byte[2,0x100];
-
-        public static void RegistaReset()
-        {
-            for(int i = 0; i < 0x100; i++)
-            {
-                Regista[0, i] = 0x00;
-                Regista[1, i] = 0x00;
-            }
-        }
-
-        private static Byte SelectedRegNum = 0x00;
-
-        public static void SelectRegsta(Byte REG)
-        {
-            switch(REG)
-            {
-                case 0x2D:
-                    {
-                        YM2608.MasterClock = 8.0f;
-                        YM2608.FMDivision = 6;
-                        YM2608.SSGDivision = 4;
-                        break;
-                    }
-                case 0x2E:
-                    {
-                        YM2608.MasterClock = 4.0f;
-                        YM2608.FMDivision = 3;
-                        YM2608.SSGDivision = 2;
-                        break;
-                    }
-                case 0x2F:
-                    {
-                        YM2608.MasterClock = 2.67f;
-                        YM2608.FMDivision = 2;
-                        YM2608.SSGDivision = 1;
-                        break;
-                    }
-                default:
-                    {
-                        SelectedRegNum = REG;
-                        break;
-                    }
-            }
-        }
-
-        public static void WriteBit(Boolean DATA, Byte Offset, Boolean A1)
-        {
-            if (Offset >= 8) return;
-            uint DATAtemp = Read(A1);
-            if(DATA)
-            {
-                if (((DATAtemp >> (int)Offset) & 0x01) == 0x01) ;
-                else DATAtemp += (uint)0x01 << (int)Offset;
-            }
-            else
-            {
-                if (((DATAtemp >> (int)Offset) & 0x01) == 0x00) ;
-                else DATAtemp -= (uint)0x01 << (int)Offset;
-            }
-            Write((Byte)DATAtemp, A1);
-        }
-
-        public static void Write(Byte DATA, Boolean A1)
-        {
-            Regista[A1 ? 1 : 0, SelectedRegNum] = DATA;
-        }
-
-        public static Byte Read(Boolean A1)
-        {
-            return Regista[A1 ? 1 : 0, SelectedRegNum];
-        } */
+namespace DAWforPMD {
+  class Register {
+    private static byte[,] _registers = new byte[2, 0x100];
+    
+    private static Action[,] _registerCallback = new Action[2, 0x100];
+    public static byte[,] Registers => _registers;
+    
+    public static void Reset() {
+      for (int i = 0; i < 0x100; i++) {
+        _registers[0, i] = 0x00;
+        _registers[1, i] = 0x00;
+      }
     }
+
+    private static Byte RegAddr = 0x00;
+
+    public static void Select(Byte address) {
+      switch (address) {
+      // 特殊レジスタには適当な値を書き込んでしまうことでコールバックを発生させる　
+      case 0x2D:
+      case 0x2E:
+      case 0x2F:
+        RegAddr = address;
+        Write(0x00, false);
+        break;
+      default:
+        RegAddr = address;
+        break;
+      }
+    }
+
+    public static void WriteBit(bool value, byte offset, bool A1) {
+      if (offset >= 8) return;
+      uint DATAtemp = Read(A1);
+      if (value) {
+        if (((DATAtemp >> (int) offset) & 0x01) == 0x01) ;
+        else DATAtemp += (uint) 0x01 << (int) offset;
+      } else {
+        if (((DATAtemp >> (int) offset) & 0x01) == 0x00) ;
+        else DATAtemp -= (uint) 0x01 << (int) offset;
+      }
+
+      Write((byte) DATAtemp, A1);
+    }
+
+    public static void Write(byte value, bool A1) {
+      // レジスタの値を書き換える
+      _registers[A1 ? 1 : 0, RegAddr] = value;
+      
+      // コールバックが存在する場合は、呼び出す
+      (_registerCallback[A1 ? 1 : 0, RegAddr])?.Invoke();
+    }
+
+    public static byte Read(bool A1) {
+      return _registers[A1 ? 1 : 0, RegAddr];
+    }
+  }
 }
