@@ -10,6 +10,8 @@ using System.Collections.Generic;
 
 namespace DAWforPMD.STT {
   public class SSTSequence {
+    // 1秒あたりのティック数（曲のテンポにあたる数）
+    private uint ticks_per_second;
     private uint tick_count = 0;
     private uint deltaTime  = 0;
 
