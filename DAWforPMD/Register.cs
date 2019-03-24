@@ -36,17 +36,11 @@ namespace DAWforPMD {
     }
 
     public static void WriteBit(bool value, byte offset, bool A1) {
-      if (offset >= 8) return;
-      uint DATAtemp = Read(A1);
-      if (value) {
-        if (((DATAtemp >> (int) offset) & 0x01) == 0x01) ;
-        else DATAtemp += (uint) 0x01 << (int) offset;
-      } else {
-        if (((DATAtemp >> (int) offset) & 0x01) == 0x00) ;
-        else DATAtemp -= (uint) 0x01 << (int) offset;
-      }
+      if (offset >= 8)
+        throw new IndexOutOfRangeException();
 
-      Write((byte) DATAtemp, A1);
+      var pos = (byte) (1 << offset);
+      Write((byte) ((Read(A1) & ~pos) | (value ? pos : 0)), A1);
     }
 
     public static void Write(byte value, bool A1) {
