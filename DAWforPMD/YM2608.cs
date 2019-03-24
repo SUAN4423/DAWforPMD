@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.Remoting.Channels;
+using DAWforPMD.STT;
 
 namespace DAWforPMD.YM2608 {
   public class YM2608 {
@@ -9,58 +11,72 @@ namespace DAWforPMD.YM2608 {
     public static Byte  SSGDivision = 4;
 
     // クロックジェネレーター関連
-    private const uint m_clock = 8000000;
+    private const uint   clock_frequency  = 8000000;
+    private       double clock_correction = 0;
 
-    private double m_correction = 0;
-
-    private const    uint sample_rate         = 44100;
-    private readonly uint m_cycles_per_sample = m_clock / sample_rate;
-    private readonly uint m_cycles_cor        = m_clock % sample_rate;
+    private const uint SampleFreq           = 44100;
+    private const uint CyclesPerSample      = clock_frequency / SampleFreq;
+    private const uint CycleCorrectionValue = clock_frequency % SampleFreq;
 
     // ティックジェネレーター関連
-    private uint tick_clock_counter = 0;
-    private uint tick_counter_correction = 0;
+    private uint TickGen_ClockCounter      = 0;
+    private uint TickGen_CounterCorrection = 0;
 
-    private uint ticks_per_second;
-    private uint clocks_per_tick;
-    private uint clocks_per_tick_correction;
+    private uint TicksPerSecond;
+    private uint ClocksPerTick;
+    private uint ClocksPerTickCorrectionValue;
 
-    private IChannel[] channels;
+    private IChannel[]  Channels;
+    private SSTSequence Sequence;
+    public  void        LoadSequence(SSTSequence sequence) => this.Sequence = sequence;
 
-    private void processBuffer(ref float[] buffer) {
+    private void ProcessBuffer(ref float[] buffer) {
       for (var i = 0; i < buffer.Length; i++) {
         var val = .0f;
 
         // クロックのずれを補正する
-        var c = m_cycles_per_sample;
-        if (m_correction >= sample_rate) {
-          m_correction = m_correction - sample_rate;
+        var c = CyclesPerSample;
+        if (clock_correction >= SampleFreq) {
+          clock_correction = clock_correction - SampleFreq;
           c++;
         }
 
         // クロック毎の処理をする
         for (var j = 0; j < c; j++) {
-          if (tick_counter_correction >= ticks_per_second) {
-            tick_counter_correction = 0;
-            tick_clock_counter++;
+          // ティック補正値の計算
+          if (TickGen_CounterCorrection >= TicksPerSecond) {
+            TickGen_CounterCorrection = TickGen_CounterCorrection - TicksPerSecond;
+            TickGen_ClockCounter++;
           }
 
-          if (tick_clock_counter >= clocks_per_tick) {
+          if (TickGen_ClockCounter >= ClocksPerTick) {
             // シーケンサーを次のティックに進める
-
+            Sequence.NextTick();
             // シーケンサーからイベントを取得し、それぞれのチャンネルに送る
+            for (uint k = 0; k < Channels.Length; k++) {
+              SSTTrackEvent evt;
+              while ((evt = Sequence.NextEvent(k)) != null) {
+                Channels[k].PushEvent(evt);
+              }
+            }
 
-            tick_clock_counter = 0;
-            tick_counter_correction += clocks_per_tick_correction;
+            TickGen_ClockCounter      =  0;
+            TickGen_CounterCorrection += ClocksPerTickCorrectionValue;
           }
 
-          tick_clock_counter++;
+          TickGen_ClockCounter++;
         }
 
         // すべてのチャンネルのサイクルを進める
+        for (var j = 0; j < c; j++) {
+          for (uint k = 0; k < Channels.Length; k++) {
+            Channels[k].NextCycle();
+          }
+        }
 
         // クロックを進める
-        m_correction += m_cycles_cor * c;
+        // （正確には補正値の値を追加する）
+        clock_correction += CycleCorrectionValue * c;
 
         // 求めた結果を代入する
         buffer[i] = val;

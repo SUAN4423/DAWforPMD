@@ -54,9 +54,9 @@ namespace DAWforPMD.STT {
   }
 
   public enum SSTEventType {
-    Ch_KeyOn  = 0x00,
-    Ch_KeyOff = 0x01,
-    Ch_Contol = 0x02,
+    Ch_KeyOn   = 0x00,
+    Ch_KeyOff  = 0x01,
+    Ch_Control = 0x02,
 
     Ch_Kill  = 0x10,
     Ch_Reset = 0x11,
@@ -118,7 +118,7 @@ namespace DAWforPMD.STT {
     public bool IsTargetTrack => (Target >> 7) != 0;
   }
 
-  static class _QueueExtensions {
+  internal static class QueueExtensions {
     public static T SafePeek<T>(this Queue<T> self) {
       if (self.Count > 0)
         return self.Peek();
