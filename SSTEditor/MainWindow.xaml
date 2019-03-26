@@ -6,7 +6,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SSTEditor"
         mc:Ignorable="d"
-        Title="SUAN SST Editor" Height="442" Width="704"
+        Title="SUAN SST Editor" Height="585" Width="829"
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
@@ -17,6 +17,10 @@
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}"
         EnableDWMDropShadow ="True" TitleCaps="False">
+    <Window.CommandBindings>
+        <!-- [ファイル]-[新規作成]用コマンド -->
+        <CommandBinding Command="Close" Executed="QuitApp_Executed" />
+    </Window.CommandBindings>
     <Controls:MetroWindow.RightWindowCommands>
         <Controls:WindowCommands>
             <Button Content="Settings" />
@@ -36,11 +40,176 @@
             </StackPanel>
         </materialDesign:DrawerHost.LeftDrawerContent>
         <DockPanel>
+            <Menu IsMainMenu="True" DockPanel.Dock="Top">
+                <MenuItem Header="_File">
+                    <MenuItem Header="_New Project..." InputGestureText="Ctrl+N">
+                        <MenuItem.Icon>
+                            <materialDesign:PackIcon Kind="File" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="_Open" InputGestureText="Ctrl+O">
+                        <MenuItem.Icon>
+                            <materialDesign:PackIcon Kind="OpenInApp" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <Separator />
+                    <MenuItem Header="_Revert" InputGestureText="Ctrl+R">
+                        <MenuItem.Icon>
+                            <materialDesign:PackIcon Kind="FileRevert" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="_Save" InputGestureText="Ctrl+S">
+                        <MenuItem.Icon>
+                            <materialDesign:PackIcon Kind="ContentSave" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="Save _As..." InputGestureText="Ctrl+Shift+S"/>
+                    <Separator />
+                    <MenuItem Header="_Import...">
+                        <MenuItem.Icon>
+                            <materialDesign:PackIcon Kind="Import" />
+                        </MenuItem.Icon>
+                        <MenuItem Header="Standard _MIDI File (SMF)" />
+                        <MenuItem Header="SUAN .THH File" />
+                    </MenuItem>
+                    <MenuItem Header="_Export...">
+                        <MenuItem.Icon>
+                            <materialDesign:PackIcon Kind="Export" />
+                        </MenuItem.Icon>
+                        <MenuItem Header="Standard _MIDI File (SMF)" />
+                        <MenuItem Header="SUAN ._THH File" />
+                    </MenuItem>
+                    <Separator />
+                    <MenuItem Header="_Publish" InputGestureText="Ctrl+Shift+P">
+                        <MenuItem.Icon>
+                            <materialDesign:PackIcon Kind="Publish" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <Separator />
+                    <MenuItem Header="_Exit" InputGestureText="Ctrl+Q" Command="Close">
+                        <MenuItem.Icon>
+                            <materialDesign:PackIcon Kind="ExitToApp" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                </MenuItem>
+                <MenuItem Header="_Edit">
+                    <MenuItem Header="_Undo" Command="Undo">
+                        <MenuItem.Icon>
+                            <materialDesign:PackIcon Kind="Undo" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="_Redo" Command="Redo">
+                        <MenuItem.Icon>
+                            <materialDesign:PackIcon Kind="Redo" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="Undo _History" InputGestureText="Ctrl+Shift+H">
+                        <MenuItem.Icon>
+                            <materialDesign:PackIcon Kind="History" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <Separator />
+                    <MenuItem Header="_Cut" Command="Cut">
+                        <MenuItem.Icon>
+                            <materialDesign:PackIcon Kind="ContentCut" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="_Copy" Command="Copy">
+                        <MenuItem.Icon>
+                            <materialDesign:PackIcon Kind="ContentCopy" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="_Paste" Command="Paste">
+                        <MenuItem.Icon>
+                            <materialDesign:PackIcon Kind="ContentPaste" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <Separator />
+                    <MenuItem Header="Select _All" Command="SelectAll">
+                        <MenuItem.Icon>
+                            <materialDesign:PackIcon Kind="SelectAll" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <Separator />
+                    <MenuItem Header="_Jobs...">
+                        <MenuItem Header="_Transpose..." />
+                        <Separator />
+                        <MenuItem Header="_Quantize..." />
+                        <MenuItem Header="_Humanize..." />
+                        <Separator />
+                        <MenuItem Header="_Trim">
+                            <MenuItem Header="Note to Remove Overlaps with Selected" />
+                            <MenuItem Header="Note to Remove Overlaps with Adjacent" />
+                            <MenuItem Header="Note to Remove Overlaps for Repeated" />
+                            <Separator />
+                            <MenuItem Header="Note Start to Playhead" />
+                            <MenuItem Header="Note End to Playhead" />
+                            <Separator />
+                            <MenuItem Header="Note End to Selected Notes (Force Legato)" />
+                            <MenuItem Header="Note End to Following Notes (Force Legato)" />
+                        </MenuItem>
+                        <Separator />
+                    </MenuItem>
+                </MenuItem>
+                <MenuItem Header="_Track">
+                    <MenuItem Header="Edit Sound..." InputGestureText="Ctrl+E" />
+                    <Separator />
+                    <MenuItem Header="_Active Track(s)">
+                        <MenuItem Header="FM Track 1" IsCheckable="True" IsChecked="True"/>
+                        <MenuItem Header="FM Track 2" IsCheckable="True" />
+                        <MenuItem Header="FM Track 3" IsCheckable="True" />
+                    </MenuItem>
+                </MenuItem>
+                <MenuItem Header="T_ranspose">
+                    <MenuItem Header="Play" InputGestureText="Space" />
+                    <Separator />
+                    <MenuItem Header="Move To..." InputGestureText="Ctrl+\" />
+                </MenuItem>
+                <MenuItem Header="_View">
+                    <MenuItem Header="Toolbar" IsCheckable="True" IsChecked="True"/>
+                    <MenuItem Header="Traspose Bar" IsCheckable="True" IsChecked="True"/>
+                    <Separator />
+                    <MenuItem Header="Register View" IsCheckable="True" InputGestureText="Ctrl+Shift+1" />
+                    <MenuItem Header="Waveform View" IsCheckable="True" InputGestureText="Ctrl+Shift+2" />
+                    <MenuItem Header="Spectrum View" IsCheckable="True" InputGestureText="Ctrl+Shift+3" />
+                </MenuItem>
+                <MenuItem Header="_Tool">
+                    <MenuItem Header="Arrow" IsChecked="True" InputGestureText="1">
+                        <MenuItem.Icon>
+                            <materialDesign:PackIcon Kind="CursorDefault" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="Move" InputGestureText="2">
+                        <MenuItem.Icon>
+                            <materialDesign:PackIcon Kind="CursorMove" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="Zoom In/Out" InputGestureText="3">
+                        <MenuItem.Icon>
+                            <materialDesign:PackIcon Kind="Magnify" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="Pencil" InputGestureText="4">
+                        <MenuItem.Icon>
+                            <materialDesign:PackIcon Kind="Pencil" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="Eraser" InputGestureText="5">
+                        <MenuItem.Icon>
+                            <materialDesign:PackIcon Kind="Eraser" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="Slice" InputGestureText="6">
+                        <MenuItem.Icon>
+                            <materialDesign:PackIcon Kind="Knife" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                </MenuItem>
+            </Menu>
             <ToolBarTray DockPanel.Dock="Top">
                 <ToolBar Style="{DynamicResource MaterialDesignToolBar}" ClipToBounds="False">
                     <Button Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand}"
-                        CommandParameter="{x:Static Dock.Left}"
-                        Grid.Row="1" Grid.Column="0"  Margin="4">
+                        CommandParameter="{x:Static Dock.Left}">
                         <materialDesign:PackIcon Kind="HamburgerMenu" />
                     </Button>
                     <Separator />
@@ -48,13 +217,13 @@
                         <materialDesign:PackIcon Kind="File" />
                     </Button>
                     <Button ToolTip="Open">
-                        <materialDesign:PackIcon Kind="Folder" />
+                        <materialDesign:PackIcon Kind="OpenInApp" />
                     </Button>
                     <Button ToolTip="Save" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
                         <materialDesign:PackIcon Kind="ContentSave" />
                     </Button>
                     <Separator />
-                    <ListBox Margin="15" Style="{DynamicResource MaterialDesignToolToggleListBox}" RenderTransformOrigin="0.5,0.5">
+                    <ListBox VerticalAlignment="Center" Style="{DynamicResource MaterialDesignToolToggleListBox}" RenderTransformOrigin="0.5,0.5">
                         <ListBoxItem IsSelected="True">
                             <materialDesign:PackIcon Kind="CursorDefault" />
                         </ListBoxItem>
@@ -62,7 +231,7 @@
                             <materialDesign:PackIcon Kind="CursorMove" />
                         </ListBoxItem>
                         <ListBoxItem>
-                            <materialDesign:PackIcon Kind="MagnifyPlusCursor" />
+                            <materialDesign:PackIcon Kind="Magnify" />
                         </ListBoxItem>
                         <ListBoxItem>
                             <materialDesign:PackIcon Kind="Pencil" />
@@ -79,7 +248,7 @@
             </ToolBarTray>
             <ToolBarTray DockPanel.Dock="Bottom" VerticalAlignment="Bottom">
                 <ToolBar Style="{DynamicResource MaterialDesignToolBar}" ClipToBounds="False">
-                    <Slider Name="PianoRollHeightSlider" Margin="20" Value="0" Minimum="0" Maximum="30" ValueChanged="Slider_ValueChanged" Width="156"/>
+                    <Slider Name="PianoRollHeightSlider" Margin="5, 5, 5, 5" Value="0" Minimum="0" Maximum="30" ValueChanged="Slider_ValueChanged" Width="19" Orientation="Vertical"/>
                     <Separator />
                     <Button ToolTip="Rewind">
                         <materialDesign:PackIcon Kind="Rewind" />

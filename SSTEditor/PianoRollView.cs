@@ -46,23 +46,29 @@ namespace SSTEditor {
       drawingContext.DrawRectangle(br, null, new Rect(0, 0, this.Width, this.Height));
 
       // draw grids
-      var notes_width = (this.Height / octaves / 12);
+      var notes_height = (this.Height / octaves / 12);
       var gridBorder = new Pen(br2, 0.5);
+      var gridBorderBold = new Pen(br2, 2);
       var view_width = this.Width;
       var br3 = new SolidColorBrush(Color.FromRgb(0x35, 0x35, 0x35));
 
-      for (int i = 0; i < 120; i++) {
+      for (int i = 0; i < 12 * octaves; i++) {
         var j = i % 12;
         if (j == 1 || j == 3 || j == 5 || j == 8 || j == 10)
-          drawingContext.DrawRectangle(br3, null, new Rect(0,  i * notes_width, this.Width, notes_width));
+          drawingContext.DrawRectangle(br3, null, new Rect(0,  i * notes_height, this.Width, notes_height));
         else
-          drawingContext.DrawLine(gridBorder, new Point(0, i * notes_width), new Point(view_width, i * notes_width));
+          drawingContext.DrawLine(gridBorder, new Point(0, i * notes_height), new Point(view_width, i * notes_height));
       }
 
       
       var view_height = this.Height;
-      for (int i = 50; i < this.Width; i += 70) {
-        drawingContext.DrawLine(gridBorder, new Point(i, 0), new Point(i, view_height));
+      for (int i = 50, j = 0; i < this.Width; i += 70) {
+        if ((j & 0x03) != 0) {
+          drawingContext.DrawLine(gridBorder, new Point(i, 0), new Point(i, view_height));
+        } else {
+          drawingContext.DrawLine(gridBorderBold, new Point(i, 0), new Point(i, view_height));
+        }
+        j++;
       }
 
       var whity_width = (this.Height / octaves / 7);

@@ -31,5 +31,9 @@ namespace SSTEditor {
     private void CalcPianoRollHeight() {
       PianoRoll.Height = (Math.Round(PianoRollHeightSlider.Value) + 7) * 120;
     }
+
+    private void QuitApp_Executed(object sender, ExecutedRoutedEventArgs e) {
+      this.Close();
+    }
   }
 }
