@@ -92,6 +92,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="NotesView.cs" />
     <Compile Include="PianoRollView.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

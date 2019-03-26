@@ -1,6 +1,17 @@
-﻿using System.Windows;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
 
 namespace SSTEditor {
   /// <summary>
@@ -29,17 +40,19 @@ namespace SSTEditor {
   /// 手順 2)
   /// コントロールを XAML ファイルで使用します。
   ///
-  ///     <MyNamespace:PianoRollView/>
+  ///     <MyNamespace:NotesView/>
   ///
   /// </summary>
-  public class PianoRollView : Control {
-    static PianoRollView() => DefaultStyleKeyProperty.OverrideMetadata(typeof(PianoRollView), new FrameworkPropertyMetadata(typeof(PianoRollView)));
+  public class NotesView : Control {
+    static NotesView() {
+      DefaultStyleKeyProperty.OverrideMetadata(typeof(NotesView), new FrameworkPropertyMetadata(typeof(NotesView)));
+    }
 
     protected override void OnRender(DrawingContext drawingContext) {
       base.OnRender(drawingContext);
       var octaves = 10;
 
-      /*// draw background
+      // draw background
       var br = new SolidColorBrush(Color.FromRgb(0x20, 0x20, 0x20));
       var br2 = new SolidColorBrush(Color.FromRgb(0x70, 0x70, 0x70));
 
@@ -62,47 +75,13 @@ namespace SSTEditor {
 
       
       var view_height = this.Height;
-      for (int i = 50, j = 0; i < this.Width; i += 70) {
+      for (int i = 0, j = 0; i < this.Width; i += 70) {
         if ((j & 0x03) != 0) {
           drawingContext.DrawLine(gridBorder, new Point(i, 0), new Point(i, view_height));
         } else {
           drawingContext.DrawLine(gridBorderBold, new Point(i, 0), new Point(i, view_height));
         }
         j++;
-      }  */
-
-      var whity_width = (this.Height / octaves / 7);
-      for (int i = 0; i < octaves; i++)
-        DrawPianoKeys(drawingContext, i, whity_width);
-    }
-
-    private void DrawPianoKeys(DrawingContext drawingContext, double offset, double width = 10) {
-      var pianoBorder = new Pen(Brushes.Gray, 1);
-      var startpos    = width * 7 * offset;
-      var br = Brushes.White;
-      for (int i = 0; i < 7; i++) {
-        if (i == 6) br = new SolidColorBrush(Color.FromRgb(0xE0, 0xFF, 0xEE));
-        drawingContext.DrawRectangle(br, pianoBorder, new Rect(0, startpos + width * i, 50, width));
-      }
-
-      var blackNoteWidth = width * 3 / 5;
-
-      var darky = new SolidColorBrush(Color.FromRgb(0x1E, 0x1F, 0x20));
-      var highlight = new SolidColorBrush(Color.FromRgb(0x3E, 0x3F, 0x3E));
-
-      for (int i = 0; i < 6; i++) {
-        if (i == 3) continue;
-
-        drawingContext.DrawRectangle(highlight, pianoBorder,
-                                      new Rect(0,
-                                               width - (blackNoteWidth * 0.5) + startpos + width * i,
-                                               25,
-                                               blackNoteWidth));
-        drawingContext.DrawRectangle(darky, null,
-                                      new Rect(0,
-                                               width - (blackNoteWidth * 0.5) + startpos + width * i,
-                                               25,
-                                               blackNoteWidth - (width * 0.25)));
       }
     }
   }

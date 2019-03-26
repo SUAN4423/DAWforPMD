@@ -267,8 +267,18 @@
                     <Separator />
                 </ToolBar>
             </ToolBarTray>
-            <ScrollViewer HorizontalScrollBarVisibility="Visible" CanContentScroll="True" Background="#FFF" DockPanel.Dock="Right">
-                <local:PianoRollView Width="5000" Height="720" x:Name="PianoRoll"/>
+            <!-- 音符が出るところ！一番重要！しんどくない！！ -->
+            <ScrollViewer HorizontalScrollBarVisibility="Disabled" Background="#FFF" DockPanel.Dock="Right">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="50" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <local:PianoRollView Width="50" Height="720" x:Name="PianoRoll"/>
+                    <ScrollViewer Grid.Column="1" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Disabled">
+                        <local:NotesView Width="5000" Height="720" x:Name="Notes" />
+                    </ScrollViewer>
+                </Grid>
             </ScrollViewer>
         </DockPanel>
     </materialDesign:DrawerHost>
