@@ -6,7 +6,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SSTEditor"
         mc:Ignorable="d"
-        Title="SUAN SST Editor" Height="450" Width="600"
+        Title="SUAN SST Editor" Height="442" Width="704"
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
@@ -32,7 +32,7 @@
                         Style="{DynamicResource MaterialDesignFlatButton}">
                     CLOSE
                 </Button>
-                
+
             </StackPanel>
         </materialDesign:DrawerHost.LeftDrawerContent>
         <DockPanel>
@@ -57,6 +57,12 @@
                     <ListBox Margin="15" Style="{DynamicResource MaterialDesignToolToggleListBox}" RenderTransformOrigin="0.5,0.5">
                         <ListBoxItem IsSelected="True">
                             <materialDesign:PackIcon Kind="CursorDefault" />
+                        </ListBoxItem>
+                        <ListBoxItem>
+                            <materialDesign:PackIcon Kind="CursorMove" />
+                        </ListBoxItem>
+                        <ListBoxItem>
+                            <materialDesign:PackIcon Kind="MagnifyPlusCursor" />
                         </ListBoxItem>
                         <ListBoxItem>
                             <materialDesign:PackIcon Kind="Pencil" />
