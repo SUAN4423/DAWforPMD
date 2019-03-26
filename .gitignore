@@ -6,6 +6,10 @@
 *.user
 *.sln.docstates
 
+# Visual Studio 2015/2017 cache/options directory
+# Stupid-ass Visual Studio...
+.vs/
+
 # Build results
 
 [Dd]ebug/
@@ -146,3 +150,7 @@ $RECYCLE.BIN/
 
 # Mac crap
 .DS_Store
+
+# .idea
+.idea
+

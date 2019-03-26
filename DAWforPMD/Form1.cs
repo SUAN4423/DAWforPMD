@@ -56,5 +56,55 @@ namespace DAWforPMD
         {
 
         }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            this.FMNUM.Items.AddRange(new object[] { this.FMNUM.Items.Count.ToString() });
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            int temp2 = this.FMNUM.SelectedIndex;
+            if (temp2 != -1)
+            {
+                this.FMNUM.Items.RemoveAt(this.FMNUM.SelectedIndex);
+                for (int i = 0; i < this.FMNUM.Items.Count; i++)
+                {
+                    this.FMNUM.SelectedIndex = i;
+                    //Console.Write(i.ToString() + " " + this.FMNUM.SelectedItem.ToString() + "\n");
+                    if (i.ToString() != this.FMNUM.SelectedItem.ToString())
+                    {
+                        this.FMNUM.Items.Insert(i, i.ToString());
+                        this.FMNUM.Items.RemoveAt(i + 1);
+                        //Console.Write(i.ToString() + " " + this.FMNUM.SelectedItem.ToString() + "\n");
+                    }
+                }
+            }
+        }
+
+        private void label12_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void comboBox1_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void comboBox2_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void comboBox4_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
