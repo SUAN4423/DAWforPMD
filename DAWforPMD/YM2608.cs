@@ -34,6 +34,10 @@ namespace DAWforPMD.YM2608 {
     public YM2608() {
       // にゃーん
       lpf = new LowpassFilter(SampleFreq);
+            for(int i = 0; i < 6; i++)
+            {
+                Channels = new Channel(i);
+            }
     }
 
     public void LoadSequence(SSTSequence sequence) => this.Sequence = sequence;
