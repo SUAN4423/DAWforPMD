@@ -154,3 +154,5 @@ $RECYCLE.BIN/
 # .idea
 .idea
 
+# Unnecessary version control of dependency packages
+packages/
