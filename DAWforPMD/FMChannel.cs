@@ -7,7 +7,7 @@ using DAWforPMD.STT;
 
 namespace DAWforPMD.YM2608
 {
-    class Channel : IChannel
+    class FMChannel : IChannel
     {
         private float sample = 0.0f;
         private UInt32 counter = 0x00000000;
@@ -19,7 +19,7 @@ namespace DAWforPMD.YM2608
         private Boolean[] KeyON = new Boolean[4] { false, false, false, false };
         private Byte KeyONReg = 0x00;
 
-        public Channel(int CHnum)
+        public FMChannel(int CHnum)
         {
             this.ChannelNumber = (Byte)CHnum;
         }

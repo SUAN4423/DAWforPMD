@@ -2,6 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.Remoting.Channels;
+using System.Threading;
+using System.Threading.Tasks;
 using DAWforPMD.STT;
 
 namespace DAWforPMD.YM2608 {
@@ -32,14 +34,51 @@ namespace DAWforPMD.YM2608 {
     private LowpassFilter lpf;
 
     public YM2608() {
-      // にゃーん
+      // ローパスフィルタの初期化 
       lpf = new LowpassFilter(SampleFreq);
-      for (int i = 0; i < 6; i++) {
-        Channels[i] = new Channel(i);
+      lpf.SetPeakFrequency(20000); // 20kHz
+
+      Channels = new IChannel[10]; // 6 FM, 3 SSG, 1 rhythm
+
+      // FMは6チャンネル
+      for (var i = 0; i < 6; i++) {
+        Channels[i] = new FMChannel(i);
       }
+
+      // SSGは3チャンネル
+      for (var i = 0; i < 4; i++) {
+        Channels[i + 6] = new OPNASSG();
+      }
+
+      // TODO リズムチャンネルの生成
     }
 
     public void LoadSequence(SSTSequence sequence) => this.Sequence = sequence;
+
+    private void TickGenNextCycle() {
+      // ティック補正値の計算
+      if (TickGen_CounterCorrection >= TicksPerSecond) {
+        TickGen_CounterCorrection = TickGen_CounterCorrection - TicksPerSecond;
+        TickGen_ClockCounter++;
+      }
+
+      if (TickGen_ClockCounter >= ClocksPerTick) {
+        // シーケンサーを次のティックに進める
+        Sequence.NextTick();
+        // シーケンサーからイベントを取得し、それぞれのチャンネルに送る
+        for (uint k = 0; k < Channels.Length; k++) {
+          SSTTrackEvent evt;
+          while ((evt = Sequence.NextEvent(k)) != null) {
+            Channels[k].PushEvent(evt);
+          }
+        }
+
+        TickGen_ClockCounter = 0;
+        TickGen_CounterCorrection += ClocksPerTickCorrectionValue;
+      }
+
+      TickGen_ClockCounter++;
+    }
 
     private void ProcessBuffer(ref float[] buffer) {
       // 与えられたバッファの分だけ信号を処理
@@ -53,43 +92,23 @@ namespace DAWforPMD.YM2608 {
           c++;
         }
 
-        // クロック毎の処理をする
+        // ティックジェネレーターの処理
         for (var j = 0; j < c; j++) {
-          // ティック補正値の計算
-          if (TickGen_CounterCorrection >= TicksPerSecond) {
-            TickGen_CounterCorrection = TickGen_CounterCorrection - TicksPerSecond;
-            TickGen_ClockCounter++;
-          }
-
-          if (TickGen_ClockCounter >= ClocksPerTick) {
-            // シーケンサーを次のティックに進める
-            Sequence.NextTick();
-            // シーケンサーからイベントを取得し、それぞれのチャンネルに送る
-            for (uint k = 0; k < Channels.Length; k++) {
-              SSTTrackEvent evt;
-              while ((evt = Sequence.NextEvent(k)) != null) {
-                Channels[k].PushEvent(evt);
-              }
-            }
-
-            TickGen_ClockCounter = 0;
-            TickGen_CounterCorrection += ClocksPerTickCorrectionValue;
-          }
-
-          TickGen_ClockCounter++;
+          TickGenNextCycle();
         }
 
         // すべてのチャンネルのサイクルを進めて、その結果をサミングする
         // （フィルター処理はしない）
-        for (var j = 0; j < c; j++) {
-          for (uint k = 0; k < Channels.Length; k++) {
+        object lockObject = new object();
+        Parallel.For(0, Channels.Length, k => {
+          for (var j = 0; j < c; j++) {
             Channels[k].NextCycle();
           }
-        }
 
-        foreach (var ch in Channels) {
-          val = val + ch.GetSample();
-        }
+          lock (lockObject) {
+            val = val + Channels[k].GetSample();
+          }
+        });
 
         // クロックを進める
         // （正確には補正値の値を追加する）
