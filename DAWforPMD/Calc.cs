@@ -27,7 +27,7 @@ namespace DAWforPMD
             }
             return Rout;
         }
-        
+
         public static Byte CalcSL(Byte SL)
         {
             Byte SLout = 0;

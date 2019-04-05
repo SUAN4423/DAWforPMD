@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 namespace DAWforPMD {
   class Register {
     private static byte[,] _registers = new byte[2, 0x100];
-    
+
     private static Action[,] _registerCallback = new Action[2, 0x100];
     public static byte[,] Registers => _registers;
-    
+
     public static void Reset() {
       for (int i = 0; i < 0x100; i++) {
         _registers[0, i] = 0x00;
@@ -42,7 +42,7 @@ namespace DAWforPMD {
       var pos = (byte) (1 << offset);
       Write((byte) ((Read(A1) & ~pos) | (value ? pos : 0)), A1);
     }
-    
+
     public static void ToggleBit(byte offset, bool A1) {
       if (offset >= 8)
         throw new IndexOutOfRangeException();
@@ -53,7 +53,7 @@ namespace DAWforPMD {
     public static void Write(byte value, bool A1) {
       // レジスタの値を書き換える
       _registers[A1 ? 1 : 0, RegAddr] = value;
-      
+
       // コールバックが存在する場合は、呼び出す
       (_registerCallback[A1 ? 1 : 0, RegAddr])?.Invoke();
     }
