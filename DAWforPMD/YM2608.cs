@@ -34,7 +34,7 @@ namespace DAWforPMD.YM2608 {
     private LowpassFilter lpf;
 
     public YM2608() {
-      // ローパスフィルタの初期化 
+      // ローパスフィルタの初期化
       lpf = new LowpassFilter(SampleFreq);
       lpf.SetPeakFrequency(20000); // 20kHz
 
