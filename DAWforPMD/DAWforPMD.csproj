@@ -47,11 +47,14 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="IChannel.cs" />
+    <Compile Include="IRegisterHandler.cs" />
     <Compile Include="MAIN.cs" />
     <Compile Include="OPNASSG.cs" />
     <Compile Include="Register.cs" />
+    <Compile Include="RhythmChannel.cs" />
     <Compile Include="SST.cs" />
     <Compile Include="Tuner.cs" />
+    <Compile Include="UnhandledRegisterException.cs" />
     <Compile Include="YM2608.cs" />
   </ItemGroup>
   <ItemGroup>
