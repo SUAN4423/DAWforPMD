@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DAWforPMD {
   class Register {
-    enum RegisterAddress {
+    public enum RegisterAddress {
       /* PSG音源の設定 */
       REG_CH_A_FINE_TUNE = 0x00,
       REG_CH_A_COARSE_TUNE,

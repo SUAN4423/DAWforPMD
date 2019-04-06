@@ -46,11 +46,12 @@ namespace DAWforPMD.YM2608 {
       }
 
       // SSGは3チャンネル
-      for (var i = 0; i < 4; i++) {
+      for (var i = 0; i < 3; i++) {
         Channels[i + 6] = new OPNASSG();
       }
 
-      // TODO リズムチャンネルの生成
+      // リズムチャンネルの生成
+      Channels[9] = new RhythmChannel();
     }
 
     public void LoadSequence(SSTSequence sequence) => this.Sequence = sequence;

@@ -6,7 +6,8 @@ using System;
 using DAWforPMD.STT;
 
 namespace DAWforPMD.YM2608 {
-  public class OPNASSG : IChannel {
+
+  public class OPNASSG : IChannel, IRegisterHandler {
     private bool  KeyOnStatus  = false;
     private uint  CycleCounter = 0;
     private uint  T_2          = 8000;
@@ -31,6 +32,13 @@ namespace DAWforPMD.YM2608 {
         break;
       default:
         throw new ArgumentOutOfRangeException();
+      }
+    }
+
+    public void HandleRegister(byte regAddr, byte regValue) {
+      switch (regAddr) {
+      default:
+        throw new UnhandledRegisterException(regAddr, regValue);
       }
     }
 
