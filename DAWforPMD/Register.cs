@@ -128,7 +128,7 @@ namespace DAWforPMD {
 
     public static void Write(byte value, bool A1) {
       // レジスタが未選択の場合は、なにもしない
-      if (RegAddr != REGISTER_UNSELECTED) {
+      if (RegAddr == REGISTER_UNSELECTED) {
         return;
       }
 
@@ -148,9 +148,9 @@ namespace DAWforPMD {
       if (((byte) RegisterAddress.REG_DUMP_RHYTHM_KEY_ON <= RegAddr) && (RegAddr != 0xFF)) {
         throw new ReadOnlyException(string.Format("register 0x%02X is read-only", RegAddr));
       }
-      
+
       // 読み出しの際は、レジスタ未選択状態でエラーになるようにする
-      if (RegAddr != REGISTER_UNSELECTED) {
+      if (RegAddr == REGISTER_UNSELECTED) {
         throw new Exception("register is not selected");
       }
 
