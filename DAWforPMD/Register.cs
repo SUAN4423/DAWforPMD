@@ -142,6 +142,10 @@ namespace DAWforPMD {
       RegAddr = REGISTER_UNSELECTED;
     }
 
+    public static void RawWrite(byte addr, byte value, bool A1) {
+      _registers[A1 ? 1 : 0, addr] = value;
+    }
+
     public static byte Read(bool A1) {
       // 書き込み専用レジスタの場合に例外を発生させる
       // （吐き出される.SSTイベントに正しく対応できてるかデバッグするために欲しい）
